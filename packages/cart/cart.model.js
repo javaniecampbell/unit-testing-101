@@ -41,6 +41,8 @@ class Cart {
         }
         // not update the quantity of a product in the cart to a negative number
         // if (quantity < 0) return;
+        // not update the quantity of a product in the cart to a non-integer
+        if (!Number.isInteger(quantity)) return;
         this.products = this.products.map(p => {
             if (p.id === product.id) {
                 const oldQuantity = p.quantity;
