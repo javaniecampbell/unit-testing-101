@@ -35,13 +35,20 @@ class Cart {
     }
 
     updateQuantity(product, quantity) {
-        if (quantity <= 0) {
+        if (quantity === 0) {
             this.removeProduct(product);
             return;
         }
+        // not update the quantity of a product in the cart to a negative number
+        // if (quantity < 0) return;
         this.products = this.products.map(p => {
             if (p.id === product.id) {
+                const oldQuantity = p.quantity;
                 p.quantity += quantity;
+                // not update the quantity of a product in the cart to a negative number
+                if (p.quantity < 0) {
+                    p.quantity = oldQuantity;
+                }
             }
             return p;
         }
