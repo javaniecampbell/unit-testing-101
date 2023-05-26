@@ -19,14 +19,14 @@ describe('cart', () => {
     })
 
     it('should remove a product from the cart', () => {
-         // step1: create a new cart
-         const cart = new Cart();
-         // step2: add a product to the cart
-         cart.addProduct({ id: 1, name: 'product1', price: 100, quantity: 1 });
-         // step3: remove the product from the cart
-         cart.removeProduct({ id: 1, name: 'product1', price: 100, quantity: 1 });
-         // step4: check if the product is in the cart
-         expect(cart.products).to.have.lengthOf(0);
+        // step1: create a new cart
+        const cart = new Cart();
+        // step2: add a product to the cart
+        cart.addProduct({ id: 1, name: 'product1', price: 100, quantity: 1 });
+        // step3: remove the product from the cart
+        cart.removeProduct({ id: 1, name: 'product1', price: 100, quantity: 1 });
+        // step4: check if the product is in the cart
+        expect(cart.products).to.have.lengthOf(0);
 
     })
 
@@ -52,14 +52,14 @@ describe('cart', () => {
     })
 
     it('should not remove a product from the cart if it is not in the cart', () => {
-       // step1: create a new cart
-         const cart = new Cart();
-            // step2: add a product to the cart
-            cart.addProduct({ id: 1, name: 'product1', price: 100, quantity: 1 });
-            // step3: remove the product from the cart
-            cart.removeProduct({ id: 2, name: 'product2', price: 200, quantity: 2 });
-            // step4: check if the product is in the cart
-            expect(cart.products).to.have.lengthOf(1);
+        // step1: create a new cart
+        const cart = new Cart();
+        // step2: add a product to the cart
+        cart.addProduct({ id: 1, name: 'product1', price: 100, quantity: 1 });
+        // step3: remove the product from the cart
+        cart.removeProduct({ id: 2, name: 'product2', price: 200, quantity: 2 });
+        // step4: check if the product is in the cart
+        expect(cart.products).to.have.lengthOf(1);
     })
 
     it('should not remove a product from the cart if the quantity is greater than the quantity in the cart', () => {

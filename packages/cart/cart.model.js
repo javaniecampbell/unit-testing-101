@@ -10,6 +10,7 @@ class Cart {
     }
 
     removeProduct(product) {
+        if (!this.products.includes(product)) return;
         this.products = this.products.filter(p => p.id !== product.id);
     }
 
