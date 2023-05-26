@@ -98,8 +98,15 @@ describe('cart', () => {
     })
 
     it('should update the quantity of a product in the cart to zero', () => {
-        expect(false).to.be.true;
-
+        // step1: create a new cart
+        const cart = new Cart();
+        // step2: add a product to the cart
+        const product = { id: 1, name: 'product1', price: 100, quantity: 1 };
+        cart.addProduct(product);
+        // step3: update the quantity of the product in the cart
+        cart.updateQuantity(product, 0);
+        // step4: check if the quantity of the product in the cart is updated
+        expect(cart.products).to.have.lengthOf(0);
     })
 
     it('should not update the quantity of a product in the cart to a negative number', () => {
