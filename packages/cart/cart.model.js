@@ -35,7 +35,13 @@ class Cart {
     }
 
     updateQuantity(product, quantity) {
-        return true;
+       this.products = this.products.map(p => {
+            if (p.id === product.id) {
+                p.quantity += quantity;
+            }
+            return p;
+        }
+        );
     }
 
     addCoupon(coupon) {
