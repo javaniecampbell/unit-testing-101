@@ -9,7 +9,7 @@ class Cart {
     }
 
     removeProduct(product) {
-        return true;
+        this.products = this.products.filter(p => p.id !== product.id);
     }
 
     increaseQuantity(product) {
