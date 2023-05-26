@@ -11,8 +11,12 @@ class Cart {
 
     removeProduct(product) {
         // if (!this.products.includes(product)) return;
+        //not remove a product from the cart if it is not in the cart
         const isProductInCart = this.products.some(p => p.id === product.id);
         if (!isProductInCart) return;
+        //not remove a product from the cart if the quantity is greater than the quantity in the cart
+        const isQuantityGreaterThanCart = this.products.some(p => p.quantity < product.quantity);
+        if (isQuantityGreaterThanCart) return;
         this.products = this.products.filter(p => p.id !== product.id);
     }
 
