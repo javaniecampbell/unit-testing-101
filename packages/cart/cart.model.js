@@ -62,7 +62,7 @@ class Cart {
     }
 
     clear() {
-        return true;
+        this.products = [];
     }
 
     getProducts() {
