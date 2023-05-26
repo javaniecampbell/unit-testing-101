@@ -145,7 +145,15 @@ describe('cart', () => {
     })
 
     it('should calculate the line total of a product in the cart', () => {
-        expect(false).to.be.true;
+        // step1: create a new cart
+        const cart = new Cart();
+        // step2: add a product to the cart
+        const product = { id: 1, name: 'product1', price: 100, quantity: 1 };
+        cart.addProduct(product);
+        // step3: calculate the line total of the product in the cart
+        const lineTotal = cart.calculateLineItemTotal(product);
+        // step4: check if the line total of the product in the cart is correct
+        expect(lineTotal).to.equal(100);
     })
 
     it('should calculate the total price of the cart', () => {
