@@ -10,7 +10,9 @@ class Cart {
     }
 
     removeProduct(product) {
-        if (!this.products.includes(product)) return;
+        // if (!this.products.includes(product)) return;
+        const isProductInCart = this.products.some(p => p.id === product.id);
+        if (!isProductInCart) return;
         this.products = this.products.filter(p => p.id !== product.id);
     }
 
