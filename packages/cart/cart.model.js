@@ -13,7 +13,13 @@ class Cart {
     }
 
     increaseQuantity(product) {
-        return true;
+        this.products = this.products.map(p => {
+            if (p.id === product.id) {
+                p.quantity++;
+            }
+            return p;
+        }
+        );
     }
 
     decreaseQuantity(product) {
