@@ -31,8 +31,14 @@ describe('cart', () => {
     })
 
     it('should increase the quantity of a product in the cart', () => {
-        expect(false).to.be.true;
-
+        // step1: create a new cart
+        const cart = new Cart();
+        // step2: add a product to the cart
+        cart.addProduct({ id: 1, name: 'product1', price: 100, quantity: 1 });
+        // step3: increase the quantity of the product in the cart
+        cart.increaseQuantity({ id: 1, name: 'product1', price: 100, quantity: 1 });
+        // step4: check if the quantity of the product in the cart is increased
+        expect(cart.products[0].quantity).to.equal(2);
     })
 
     it('should not add a product to the cart if the quantity is less than or equal to zero', () => {
