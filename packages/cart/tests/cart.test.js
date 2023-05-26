@@ -19,7 +19,14 @@ describe('cart', () => {
     })
 
     it('should remove a product from the cart', () => {
-        expect(false).to.be.true;
+         // step1: create a new cart
+         const cart = new Cart();
+         // step2: add a product to the cart
+         cart.addProduct({ id: 1, name: 'product1', price: 100, quantity: 1 });
+         // step3: remove the product from the cart
+         cart.removeProduct({ id: 1, name: 'product1', price: 100, quantity: 1 });
+         // step4: check if the product is in the cart
+         expect(cart.products).to.have.lengthOf(0);
 
     })
 
