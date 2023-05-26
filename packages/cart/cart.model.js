@@ -102,7 +102,7 @@ class Cart {
     }
 
     calculateLineItemTotal(product) {
-        return 0;
+        return product.price * product.quantity;
     }
 
 }
