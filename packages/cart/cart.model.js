@@ -35,7 +35,11 @@ class Cart {
     }
 
     updateQuantity(product, quantity) {
-       this.products = this.products.map(p => {
+        if (quantity <= 0) {
+            this.removeProduct(product);
+            return;
+        }
+        this.products = this.products.map(p => {
             if (p.id === product.id) {
                 p.quantity += quantity;
             }
