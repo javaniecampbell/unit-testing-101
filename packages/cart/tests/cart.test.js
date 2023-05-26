@@ -134,8 +134,14 @@ describe('cart', () => {
     })
 
     it('should clear the cart', () => {
-        expect(false).to.be.true;
-
+        // step1: create a new cart
+        const cart = new Cart();
+        // step2: add a product to the cart
+        cart.addProduct({ id: 1, name: 'product1', price: 100, quantity: 1 });
+        // step3: clear the cart
+        cart.clear();
+        // step4: check if the cart is empty
+        expect(cart.products).to.have.lengthOf(0);
     })
 
     it('should calculate the line total of a product in the cart', () => {
