@@ -5,6 +5,7 @@ class Cart {
     }
 
     addProduct(product) {
+        if (product.quantity <= 0) return;
         this.products.push(product);
     }
 
