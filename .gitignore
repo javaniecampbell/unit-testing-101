@@ -295,7 +295,7 @@ sam.yaml
 *mies
 
 # Other names that would make sense
-*tests
+# *tests
 *testsdir
 *testsfile
 *testsfiles
