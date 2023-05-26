@@ -1,10 +1,11 @@
 class Cart {
-    constructor({ }) {
-
+    constructor() {
+        this.products = [];
+        this.coupons = [];
     }
 
     addProduct(product) {
-        return true;
+        this.products.push(product);
     }
 
     removeProduct(product) {
