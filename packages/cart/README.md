@@ -1,6 +1,8 @@
 # Unit Testing 101
 Write unit tests 
 
+Assignment - 
+
 - setup a project for the shopping cart
 for the following
 
@@ -9,7 +11,7 @@ for the following
 - increase 
 - decrease
 - items below 1 should be removed from cart
-- when same items is added from catalog it should in create the quantity of the items in cart
+- when same items is added from catalog it should increase the quantity of the items in cart
 - total amount of unique items should increase by one
 - cost as per item * quantity * price
 - total cost in subtotal
@@ -20,6 +22,13 @@ for the following
 - after the payment is successful then an email should sent
 - Email and external services can be mocked
 
+
+Presenting on the following:
+- What I have accomplished?
+- What was my approach for this exercise?
+- What did learn or noticed while taking the approach I took?
+
+Baseline with a starting commit
 
 Focus
 -----
