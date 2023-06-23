@@ -180,4 +180,15 @@ describe('cart', () => {
 
     })
 
+    it('should be able to checkout the cart', () => {
+        // step1: create a new cart
+        const cart = new Cart();
+        // step2: add a product to the cart
+        cart.addProduct({ id: 1, name: 'product1', price: 100, quantity: 1 });
+        // step3: checkout the cart
+        cart.checkOut();
+        // step4: check if the cart is empty
+        expect(cart.products).to.have.lengthOf(0);
+    })
+
 })
