@@ -157,8 +157,14 @@ describe('cart', () => {
     })
 
     it('should calculate the total price of the cart', () => {
-        expect(false).to.be.true;
-
+        // step1: create a new cart
+        const cart = new Cart();
+        // step2: add a product to the cart
+        cart.addProduct({ id: 1, name: 'product1', price: 100, quantity: 1 });
+        // step3: calculate the total price of the cart
+        const totalPrice = cart.calculateTotalPrice();
+        // step4: check if the total price of the cart is correct
+        expect(totalPrice).to.equal(100);
     })
 
     it('should calculate the total price of the cart with a discount', () => {
