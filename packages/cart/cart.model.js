@@ -69,7 +69,7 @@ class Cart {
         return [];
     }
 
-    calculateTotal() {
+    calculateTotalPrice() {
         return 0;
     }
 
@@ -105,6 +105,9 @@ class Cart {
         return product.price * product.quantity;
     }
 
+    checkOut(){
+       this.clear();
+    }
 }
 
 
