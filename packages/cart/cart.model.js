@@ -70,7 +70,10 @@ class Cart {
     }
 
     calculateTotalPrice() {
-        return 0;
+        const cartTotal = this.products.reduce((total, product) => {
+            return total + this.calculateLineItemTotal(product);
+        }, 0);
+        return cartTotal;
     }
 
     calculateTotalWithTax() {
