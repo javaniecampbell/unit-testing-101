@@ -168,8 +168,37 @@ describe('cart', () => {
     })
 
     it('should calculate the total price of the cart with a discount', () => {
-        expect(false).to.be.true;
+        const cart = new Cart();
 
+        cart.addProduct({ id: 1, name: 'product1', price: 100, quantity: 1 });
+
+        cart.addDiscount({ id: 1, name: 'discount1', amount: 10 });
+
+        const totalPrice = cart.calculateDiscountedTotalPrice();
+
+        expect(totalPrice).to.equal(90);
+    })
+
+    it('should be able to add multiple discounts to the cart', () => {
+        const cart = new Cart();
+
+        cart.addDiscount({ id: 1, name: 'discount1', amount: 10 });
+        cart.addDiscount({ id: 1, name: 'discount2', amount: 10 });
+        
+        expect(cart.discounts).to.have.lengthOf(2);
+    })
+
+    it('should calculate the total price of the cart with multiple discounts', () => {
+        const cart = new Cart();
+
+        cart.addProduct({ id: 1, name: 'product1', price: 100, quantity: 1 });
+
+        cart.addDiscount({ id: 1, name: 'discount1', amount: 10 });
+        cart.addDiscount({ id: 2, name: 'discount2', amount: 20 });
+
+        const totalPrice = cart.calculateDiscountedTotalPrice();
+
+        expect(totalPrice).to.equal(70);
     })
 
     it('should calculate the total price of the cart with a discount and shipping', () => {
