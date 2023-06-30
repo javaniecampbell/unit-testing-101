@@ -2,7 +2,9 @@ class Cart {
     constructor() {
         this.products = [];
         this.coupons = [];
+        this.discounts = [];
     }
+
 
     addProduct(product) {
         if (product.quantity <= 0) return;
@@ -88,8 +90,18 @@ class Cart {
         return 0;
     }
 
-    calculateDiscount() {
-        return 0;
+    calculateDiscountedTotalPrice() {
+        const discountTotal = this.discounts
+        .map(discount => discount.amount)
+        .reduce((total, discount) => {
+            return total + discount;
+        }, 0);
+        return this.calculateTotalPrice() - discountTotal;
+    }
+
+
+    addDiscount(discount) {
+        this.discounts.push(discount);
     }
 
     calculateSubtotal() {
@@ -108,8 +120,8 @@ class Cart {
         return product.price * product.quantity;
     }
 
-    checkOut(){
-       this.clear();
+    checkOut() {
+        this.clear();
     }
 }
 
