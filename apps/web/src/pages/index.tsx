@@ -10,6 +10,14 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import {
+  UserButton,
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  SignUpButton,
+  useSession,
+} from "@clerk/nextjs";
 const inter = Inter({ subsets: ["latin"] });
 
 const navigation = {
@@ -206,7 +214,7 @@ function classNames(...classes: string[]) {
 
 export default function Home() {
   const [open, setOpen] = useState(false);
-
+  const { session } = useSession();
   return (
     <div className={`bg-white ${inter.className}`}>
       {/* Mobile menu */}
@@ -348,28 +356,45 @@ export default function Home() {
                 </div>
 
                 <div className="space-y-6 border-t border-gray-200 px-4 py-6">
-                  <div className="flow-root">
-                    <a
-                      href="#"
-                      className="-m-2 block p-2 font-medium text-gray-900"
-                    >
-                      Sign in
-                    </a>
-                  </div>
-                  <div className="flow-root">
-                    <a
-                      href="#"
-                      className="-m-2 block p-2 font-medium text-gray-900"
-                    >
-                      Create account
-                    </a>
-                  </div>
+                  <SignedIn>
+                    <div className="flow-root">
+                      <span className="font-medium text-gray-900 hover:text-gray-800 flex items-center space-x-2">
+                        <UserButton />
+                        <span>
+                          {session?.user?.firstName} {session?.user?.lastName}
+                        </span>
+                      </span>
+                    </div>
+                  </SignedIn>
+                  <SignedOut>
+                    <div className="flow-root">
+                      <SignInButton>
+                        <a
+                          href="#"
+                          className="-m-2 block p-2 font-medium text-gray-900"
+                        >
+                          Sign in
+                        </a>
+                      </SignInButton>
+                    </div>
+                    <div className="flow-root">
+                      <SignUpButton>
+                        <a
+                          href="#"
+                          className="-m-2 block p-2 font-medium text-gray-900"
+                        >
+                          Create account
+                        </a>
+                      </SignUpButton>
+                    </div>
+                  </SignedOut>
                 </div>
 
                 <div className="border-t border-gray-200 px-4 py-6">
                   <a href="#" className="-m-2 flex items-center p-2">
                     <Image
-                      fill={true}
+                      width={20}
+                      height={20}
                       src="https://tailwindui.com/img/flags/flag-canada.svg"
                       alt=""
                       className="block h-auto w-5 flex-shrink-0"
@@ -406,7 +431,7 @@ export default function Home() {
               {/* Logo */}
               <div className="ml-4 flex lg:ml-0">
                 <a href="#">
-                  <span className="sr-only">Your Company</span>
+                  <span className="sr-only">Essential Collections</span>
                   <Image
                     // fill={true}
                     className="h-8 w-auto"
@@ -557,19 +582,28 @@ export default function Home() {
 
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                  <a
-                    href="#"
-                    className="text-sm font-medium text-gray-700 hover:text-gray-800"
-                  >
-                    Sign in
-                  </a>
-                  <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
-                  <a
-                    href="#"
-                    className="text-sm font-medium text-gray-700 hover:text-gray-800"
-                  >
-                    Create account
-                  </a>
+                  <SignedOut>
+                    <SignInButton>
+                      <a
+                        href="#"
+                        className="text-sm font-medium text-gray-700 hover:text-gray-800"
+                      >
+                        Sign in
+                      </a>
+                    </SignInButton>
+                    <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
+                    <SignUpButton>
+                      <a
+                        href="#"
+                        className="text-sm font-medium text-gray-700 hover:text-gray-800"
+                      >
+                        Create account
+                      </a>
+                    </SignUpButton>
+                  </SignedOut>
+                  <SignedIn>
+                    <UserButton />
+                  </SignedIn>
                 </div>
 
                 <div className="hidden lg:ml-8 lg:flex">
