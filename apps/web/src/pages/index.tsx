@@ -9,6 +9,7 @@ import {
   ShoppingBagIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
+import Link from "next/link";
 const inter = Inter({ subsets: ["latin"] });
 
 const navigation = {
@@ -734,13 +735,13 @@ export default function Home() {
               >
                 Shop by Category
               </h2>
-              <a
-                href="#"
+              <Link
+                href={`/category`}
                 className="hidden text-sm font-semibold text-indigo-600 hover:text-indigo-500 sm:block"
               >
                 Browse all categories
                 <span aria-hidden="true"> &rarr;</span>
-              </a>
+              </Link>
             </div>
 
             <div className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:grid-rows-2 sm:gap-x-6 lg:gap-8">
