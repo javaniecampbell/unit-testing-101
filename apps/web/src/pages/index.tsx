@@ -196,7 +196,7 @@ const footerNavigation = {
     { name: "Privacy", href: "#" },
   ],
   account: [
-    { name: "Manage Account", href: "#" },
+    { name: "Manage Account", href: "/account/profile" },
     { name: "Returns & Exchanges", href: "#" },
     { name: "Redeem a Gift Card", href: "#" },
   ],
@@ -1101,12 +1101,12 @@ export default function Home() {
                   <ul role="list" className="mt-6 space-y-6">
                     {footerNavigation.account.map((item) => (
                       <li key={item.name} className="text-sm">
-                        <a
+                        <Link
                           href={item.href}
                           className="text-gray-500 hover:text-gray-600"
                         >
                           {item.name}
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>
