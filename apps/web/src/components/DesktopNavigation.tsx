@@ -14,6 +14,7 @@ import {
   SignUpButton,
 } from "@clerk/nextjs";
 import { navigation, classNames } from "./index";
+import Link from "next/link";
 
 export function DesktopNavigation({
   setOpen,
@@ -40,17 +41,18 @@ export function DesktopNavigation({
 
             {/* Logo */}
             <div className="ml-4 flex lg:ml-0">
-              <a href="#">
+              <Link href="/">
                 <span className="sr-only">Essential Collections</span>
                 <Image
                   // fill={true}
-                  className="h-8 w-auto"
+                  className="h-8 w-auto border-gray-500 bg-slate-200 rounded-full"
                   height={32}
                   width={32}
-                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                  // src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                  src="/logo.svg"
                   alt=""
                 />
-              </a>
+              </Link>
             </div>
 
             {/* Flyout menus */}
@@ -240,7 +242,7 @@ export function DesktopNavigation({
 
               {/* Cart */}
               <div className="ml-4 flow-root lg:ml-6">
-                <a href="#" className="group -m-2 flex items-center p-2">
+                <Link href="/cart" className="group -m-2 flex items-center p-2">
                   <ShoppingBagIcon
                     className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                     aria-hidden="true"
@@ -249,7 +251,7 @@ export function DesktopNavigation({
                     0
                   </span>
                   <span className="sr-only">items in cart, view bag</span>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
