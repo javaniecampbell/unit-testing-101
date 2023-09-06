@@ -15,12 +15,16 @@ import {
 } from "@clerk/nextjs";
 import { navigation, classNames } from "./index";
 import Link from "next/link";
+import useCartStore from "@/store/CartStore";
 
 export function DesktopNavigation({
   setOpen,
 }: {
   setOpen: (open: boolean) => void;
 }) {
+  const cart = 
+  //{ total: 0 }; 
+  useCartStore(); //REPALCE with actual cart count
   return (
     <>
       {/* Top navigation */}
@@ -248,7 +252,9 @@ export function DesktopNavigation({
                     aria-hidden="true"
                   />
                   <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
-                    0
+                    {/* 0 */}
+                    {/* REPLACE with cart count below */}
+                    {cart.total}
                   </span>
                   <span className="sr-only">items in cart, view bag</span>
                 </Link>

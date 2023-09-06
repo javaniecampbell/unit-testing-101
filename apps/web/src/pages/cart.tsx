@@ -12,45 +12,8 @@ import {
   XMarkIcon as XMarkIconMini,
 } from "@heroicons/react/20/solid";
 import Image from "next/image";
+import useCartStore from "@/store/CartStore";
 
-const products = [
-  {
-    id: 1,
-    name: "Basic Tee",
-    href: "#",
-    price: "$32.00",
-    color: "Sienna",
-    inStock: true,
-    size: "Large",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-product-01.jpg",
-    imageAlt: "Front of men's Basic Tee in sienna.",
-  },
-  {
-    id: 2,
-    name: "Basic Tee",
-    href: "#",
-    price: "$32.00",
-    color: "Black",
-    inStock: false,
-    leadTime: "3–4 weeks",
-    size: "Large",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-product-02.jpg",
-    imageAlt: "Front of men's Basic Tee in black.",
-  },
-  {
-    id: 3,
-    name: "Nomad Tumbler",
-    href: "#",
-    price: "$35.00",
-    color: "White",
-    inStock: true,
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-product-03.jpg",
-    imageAlt: "Insulated bottle with white base and black snap lid.",
-  },
-];
 const relatedProducts = [
   {
     id: 1,
@@ -105,12 +68,17 @@ const inter = Inter({ subsets: ["latin"] });
 function ShoppingCart() {
   const [open, setOpen] = useState(false);
   const { session } = useSession();
+  const cart = useCartStore();
   return (
     <div className={`bg-white ${inter.className}`}>
-      <Header open={open} setOpen={setOpen} session={session} />
+      <Header open={open} setOpen={setOpen} session={session}>
+        {/* <div className="pb-80 pt-16 sm:pb-40 sm:pt-24 lg:pb-48 lg:pt-40" /> */}
+      </Header>
       <main className="mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8">
         <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-          Shopping Cart
+          {/* Shopping Cart */}
+          {/* REPLACE Total cart items here */}
+          Shopping Cart ({cart.total})
         </h1>
 
         <form className="mt-12 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16">
@@ -123,7 +91,7 @@ function ShoppingCart() {
               role="list"
               className="divide-y divide-gray-200 border-b border-t border-gray-200"
             >
-              {products.map((product, productIdx) => (
+              {cart.items.map((product, productIdx) => (
                 <li key={product.id} className="flex py-6 sm:py-10">
                   <div className="flex-shrink-0">
                     <img
@@ -155,7 +123,13 @@ function ShoppingCart() {
                           ) : null}
                         </div>
                         <p className="mt-1 text-sm font-medium text-gray-900">
-                          {product.price}
+                          {/* {product.price} */}
+                          {/* Format number to currency */}
+                          {Intl.NumberFormat("en-CA", {
+                            style: "currency",
+                            currency: "CAD",
+                            minimumFractionDigits: 2,
+                          }).format(product.price)}
                         </p>
                       </div>
 
@@ -169,6 +143,7 @@ function ShoppingCart() {
                         <select
                           id={`quantity-${productIdx}`}
                           name={`quantity-${productIdx}`}
+                          defaultValue={product.quantity}
                           className="max-w-full rounded-md border border-gray-300 py-1.5 text-left text-base font-medium leading-5 text-gray-700 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
                         >
                           <option value={1}>1</option>
@@ -236,10 +211,18 @@ function ShoppingCart() {
             <dl className="mt-6 space-y-4">
               <div className="flex items-center justify-between">
                 <dt className="text-sm text-gray-600">Subtotal</dt>
-                <dd className="text-sm font-medium text-gray-900">$99.00</dd>
+                {/* <dd className="text-sm font-medium text-gray-900">$99.00</dd> */}
+                <dd className="text-sm font-medium text-gray-900">
+                  {/* {cart.subTotal} */}
+                  {Intl.NumberFormat("en-CA", {
+                    style: "currency",
+                    currency: "CAD",
+                    minimumFractionDigits: 2,
+                  }).format(cart.subTotal)}
+                </dd>
               </div>
-              <div className="flex items-center justify-between border-t border-gray-200 pt-4">
-                <dt className="flex items-center text-sm text-gray-600">
+              {/* <div className="flex items-center justify-between border-t border-gray-200 pt-4"> */}
+                {/* <dt className="flex items-center text-sm text-gray-600">
                   <span>Shipping estimate</span>
                   <a
                     href="#"
@@ -253,11 +236,19 @@ function ShoppingCart() {
                       aria-hidden="true"
                     />
                   </a>
-                </dt>
-                <dd className="text-sm font-medium text-gray-900">$5.00</dd>
-              </div>
-              <div className="flex items-center justify-between border-t border-gray-200 pt-4">
-                <dt className="flex text-sm text-gray-600">
+                </dt> */}
+                {/* <dd className="text-sm font-medium text-gray-900">$5.00</dd> */}
+                {/* <dd className="text-sm font-medium text-gray-900"> */}
+                  {/* {cart.shippingEstimate} */}
+                  {/* {Intl.NumberFormat("en-CA", {
+                    style: "currency",
+                    currency: "CAD",
+                    minimumFractionDigits: 2,
+                  }).format(cart.shippingEstimate ?? 0)} */}
+                {/* </dd> */}
+              {/* </div> */}
+              {/* <div className="flex items-center justify-between border-t border-gray-200 pt-4"> */}
+                {/* <dt className="flex text-sm text-gray-600">
                   <span>Tax estimate</span>
                   <a
                     href="#"
@@ -271,20 +262,40 @@ function ShoppingCart() {
                       aria-hidden="true"
                     />
                   </a>
-                </dt>
-                <dd className="text-sm font-medium text-gray-900">$8.32</dd>
-              </div>
+                </dt> */}
+                {/* <dd className="text-sm font-medium text-gray-900">$8.32</dd> */}
+                {/* <dd className="text-sm font-medium text-gray-900"> */}
+                  {/* {cart.taxEstimate} */}
+                  {/* {Intl.NumberFormat("en-CA", {
+                    style: "currency",
+                    currency: "CAD",
+                    minimumFractionDigits: 2,
+                  }).format(cart?.taxEstimate ?? 0)} */}
+                {/* </dd> */}
+              {/* </div> */}
               <div className="flex items-center justify-between border-t border-gray-200 pt-4">
                 <dt className="text-base font-medium text-gray-900">
                   Order total
                 </dt>
-                <dd className="text-base font-medium text-gray-900">$112.32</dd>
+                {/* <dd className="text-base font-medium text-gray-900">$112.32</dd> */}
+                <dd className="text-base font-medium text-gray-900">
+                  {/* {cart.orderTotal} */}
+                  {Intl.NumberFormat("en-CA", {
+                    style: "currency",
+                    currency: "CAD",
+                    minimumFractionDigits: 2,
+                  }).format(cart.orderTotal)}
+                </dd>
               </div>
             </dl>
 
             <div className="mt-6">
               <button
                 type="submit"
+                onClick={e=> {
+                  e.preventDefault();
+                  cart.actions.checkout();
+                }}
                 className="w-full rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
               >
                 Checkout
@@ -333,7 +344,6 @@ function ShoppingCart() {
           </div>
         </section>
       </main>
-
       <Footer />
     </div>
   );
