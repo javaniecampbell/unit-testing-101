@@ -1,3 +1,4 @@
+
 class Cart {
     constructor() {
         this.products = [];
@@ -5,7 +6,9 @@ class Cart {
         this.discounts = [];
     }
 
-
+    // get cart() {
+    //     return this.products;
+    // }
     addProduct(product) {
         if (product.quantity <= 0) return;
         this.products.push(product);
@@ -68,7 +71,8 @@ class Cart {
     }
 
     getProducts() {
-        return [];
+        //TODO: Write a test for the items returned when added
+        return this.products;
     }
 
     calculateTotalPrice() {
@@ -92,10 +96,10 @@ class Cart {
 
     calculateDiscountedTotalPrice() {
         const discountTotal = this.discounts
-        .map(discount => discount.amount)
-        .reduce((total, discount) => {
-            return total + discount;
-        }, 0);
+            .map(discount => discount.amount)
+            .reduce((total, discount) => {
+                return total + discount;
+            }, 0);
         return this.calculateTotalPrice() - discountTotal;
     }
 
@@ -105,15 +109,20 @@ class Cart {
     }
 
     calculateSubtotal() {
-        return 0;
+        return this.calculateTotalPrice() - (this.calculateDiscountedTotalPrice() ?? 0);
     }
 
     calculateTotalItems() {
-        return 0;
+        return this.products.length; // REPLACE with the correct implementation.
+        // return this.products.reduce((total, product) => {
+        //     return total + product.quantity;
+        // }, 0);
     }
 
     calculateTotalUniqueItems() {
-        return 0;
+
+        return 0; // REPLACE with the correct implementation.
+        // return this.products.length; 
     }
 
     calculateLineItemTotal(product) {
@@ -125,5 +134,7 @@ class Cart {
     }
 }
 
-
+//EXPLAIN: How to export a class in Node.js (CommonJS) and ES6 for use in other files in the same project (package)
+module.exports.default = { Cart };
+//END EXPLAIN
 module.exports = { Cart };
