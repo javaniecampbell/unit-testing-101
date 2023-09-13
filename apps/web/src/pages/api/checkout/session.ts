@@ -10,6 +10,10 @@ type Data = {
   }
 }
 
+type Fault = {
+  message?: string
+}
+
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2023-08-16',
 });
@@ -21,11 +25,12 @@ type CartItem = {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<Data | Fault>
 ) {
 
   if (req.method === 'POST') {
-    const items = req.body as CartItem[]
+    const result = JSON.parse(req.body)
+    const items = result?.items as CartItem[];
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
       line_items: items.map((item) => ({
@@ -38,8 +43,9 @@ export default async function handler(
         },
         quantity: item.quantity,
       })),
-      success_url: `http://${req.headers.origin}/success?session={SESSION_ID}`,
-      cancel_url: `http://${req.headers.origin}/cart?canceled=true&session={SESSION_ID}`,
+      //REPLACE: Replace {SESSION_ID} with {CHECKOUT_SESSION_ID} success and cancel URLs
+      success_url: `http://${req.headers.origin}/success?session={CHECKOUT_SESSION_ID}`,
+      cancel_url: `http://${req.headers.origin}/cart?canceled=true&session={CHECKOUT_SESSION_ID}`,
 
     });
     //REPLACE: Replace this with your own logic
@@ -51,6 +57,7 @@ export default async function handler(
     })
   } else {
     res.setHeader('Allow', 'POST');
-    res.status(405).end('Method Not Allowed');
+    res.status(405).json({ message: 'Method Not Allowed' });
+    res.end();
   }
 }
