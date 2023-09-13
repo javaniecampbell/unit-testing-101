@@ -13,6 +13,7 @@ import {
 } from "@heroicons/react/20/solid";
 import Image from "next/image";
 import useCartStore from "@/store/CartStore";
+import CheckoutButton from "@/components/CheckoutButton";
 
 const relatedProducts = [
   {
@@ -222,7 +223,7 @@ function ShoppingCart() {
                 </dd>
               </div>
               {/* <div className="flex items-center justify-between border-t border-gray-200 pt-4"> */}
-                {/* <dt className="flex items-center text-sm text-gray-600">
+              {/* <dt className="flex items-center text-sm text-gray-600">
                   <span>Shipping estimate</span>
                   <a
                     href="#"
@@ -237,18 +238,18 @@ function ShoppingCart() {
                     />
                   </a>
                 </dt> */}
-                {/* <dd className="text-sm font-medium text-gray-900">$5.00</dd> */}
-                {/* <dd className="text-sm font-medium text-gray-900"> */}
-                  {/* {cart.shippingEstimate} */}
-                  {/* {Intl.NumberFormat("en-CA", {
+              {/* <dd className="text-sm font-medium text-gray-900">$5.00</dd> */}
+              {/* <dd className="text-sm font-medium text-gray-900"> */}
+              {/* {cart.shippingEstimate} */}
+              {/* {Intl.NumberFormat("en-CA", {
                     style: "currency",
                     currency: "CAD",
                     minimumFractionDigits: 2,
                   }).format(cart.shippingEstimate ?? 0)} */}
-                {/* </dd> */}
+              {/* </dd> */}
               {/* </div> */}
               {/* <div className="flex items-center justify-between border-t border-gray-200 pt-4"> */}
-                {/* <dt className="flex text-sm text-gray-600">
+              {/* <dt className="flex text-sm text-gray-600">
                   <span>Tax estimate</span>
                   <a
                     href="#"
@@ -263,15 +264,15 @@ function ShoppingCart() {
                     />
                   </a>
                 </dt> */}
-                {/* <dd className="text-sm font-medium text-gray-900">$8.32</dd> */}
-                {/* <dd className="text-sm font-medium text-gray-900"> */}
-                  {/* {cart.taxEstimate} */}
-                  {/* {Intl.NumberFormat("en-CA", {
+              {/* <dd className="text-sm font-medium text-gray-900">$8.32</dd> */}
+              {/* <dd className="text-sm font-medium text-gray-900"> */}
+              {/* {cart.taxEstimate} */}
+              {/* {Intl.NumberFormat("en-CA", {
                     style: "currency",
                     currency: "CAD",
                     minimumFractionDigits: 2,
                   }).format(cart?.taxEstimate ?? 0)} */}
-                {/* </dd> */}
+              {/* </dd> */}
               {/* </div> */}
               <div className="flex items-center justify-between border-t border-gray-200 pt-4">
                 <dt className="text-base font-medium text-gray-900">
@@ -290,7 +291,7 @@ function ShoppingCart() {
             </dl>
 
             <div className="mt-6">
-              <button
+              {/* <button
                 type="submit"
                 onClick={e=> {
                   e.preventDefault();
@@ -299,7 +300,14 @@ function ShoppingCart() {
                 className="w-full rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
               >
                 Checkout
-              </button>
+              </button> */}
+              <CheckoutButton
+                onClick={(e) => {
+                  e.preventDefault();
+                  // cart.actions.checkout();
+                }}
+                items={cart.items}
+              />
             </div>
           </section>
         </form>
