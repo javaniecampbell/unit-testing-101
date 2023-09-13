@@ -4,7 +4,7 @@ import { create } from "zustand";
 
 import Cart from "cart";
 //STEP 1: Create a type for the cart item for the view to bind to
-type CartItem = {
+export type CartItem = {
     id: number;
     name: string;
     price: number; // REPLACE: This is a string in the example, but it should be a number
@@ -136,3 +136,4 @@ const useCartStore = create<CartStore & Actions>((set) => ({
 }));
 
 export default useCartStore;
+
